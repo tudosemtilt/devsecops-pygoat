@@ -6,7 +6,10 @@ jobs:
   sast_scan:
     name: Run CodeQL Scan
     runs-on: ubuntu-latest
-
+    timeout-minutes: 10
+    permissions:
+      security-events: write
+      
     strategy:
       fail-fast: false
       matrix:
@@ -19,7 +22,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: 'python'
+        languages: ${{ matrix.language }}
         
     - name: Perform Analysis
       uses: github/codeql-action/analyze@v3
@@ -27,8 +30,11 @@ jobs:
         category: "/language:{{matrix.language}}"
 
   dast_scan:
-    runs-on: ubuntu-latest
     name: Scan a vulnerable app from the web
+    runs-on: ubuntu-latest
+    
+    permissions:
+      security-events: write
     steps:
       - name: OWASP ZAP Scan
         uses: zaproxy/action-baseline@v0.6.1
