@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "quake-log-report-cloudwalk"
+version = "0.1.0"
+description = "Log parser and reporter for Cloudwalk software engineering evaluation"
+authors = ["Caio Gevegir <56521026+caiogevegir@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.1.1"
+pytest-cov = "^4.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
